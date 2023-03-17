@@ -1,5 +1,5 @@
-{% extends 'bootstrap/base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% extends 'index.html' %}
+{% import "bootstrap/form.html" as wtf %}
 
 {% block styles %}
   {{ super() }}
@@ -13,9 +13,11 @@
 {% block content %}
 <div class="container">
     <h1 class="heading">Select Movie</h1>
-  <p>
-    <a href="#"> MOVIE TITLE - MOVIE RELEASE DATE</a>
-  </p>
-
+      <p>
+        {% for movie_data in search_results %}
+            <a href="{{ url_for('edit', movie_id=movie_data['id'], movie_title=movie_data['original_title']) }}"> {{ movie_data['title'] }} - {{  movie_data['release_date'] }}</a>
+            <br>
+        {% endfor %}
+      </p>
 </div>
 {% endblock %}
